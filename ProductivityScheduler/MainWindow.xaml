@@ -1,12 +1,57 @@
 ﻿<Window x:Class="ProductivityScheduler.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:src="clr-namespace:ProductivityScheduler"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProductivityScheduler"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" Height="720" Width="1280"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
+    <AdornerDecorator>
+        <Grid Margin="32,10,32,32">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.ColumnSpan="3">Classic WPF DatePicker control with Material Design theme, and new TimePicker control:</TextBlock>
+            <StackPanel Grid.Row="1" Grid.Column="0"/>
+            <materialDesign:TimePicker Grid.Row="1"  VerticalAlignment="Top"  Width="100" HorizontalAlignment="Left" Margin="10,16,0,0"
+                                   Style="{StaticResource MaterialDesignFloatingHintTimePicker}"
+                                   materialDesign:HintAssist.Hint="Start Time" Grid.ColumnSpan="2" Name="startTime"/>
+            <materialDesign:TimePicker Grid.Row="1" Grid.Column="2"  VerticalAlignment="Top"  Width="100" HorizontalAlignment="Left" Margin="0,16,0,0"
+                Style="{StaticResource MaterialDesignFloatingHintTimePicker}"
+                materialDesign:HintAssist.Hint="End Time" Grid.ColumnSpan="2" Name="endTime"/>
+            <Button Content="Add Event" Grid.Column="3" HorizontalAlignment="Left" Margin="235,11,0,0" Grid.Row="1" VerticalAlignment="Top" Width="111" Click="Button_Click"/>
+            <ListBox Name="lbMonday" HorizontalAlignment="Left" Height="573" Margin="10,12,0,-581" Grid.Row="3" VerticalAlignment="Top" Width="242">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="35" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding day}" />
+                            <ProgressBar Grid.Column="1" Minimum="0" Maximum="50" Value="{Binding time}" />
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+    </AdornerDecorator>
 </Window>
